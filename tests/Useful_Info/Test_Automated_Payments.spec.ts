@@ -2,10 +2,10 @@
 Date: 06/01/2025
 Created by: Avi */
 
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 import { HomePage, isVisible, urlContains, getTextAndCompare } from '../../pages/Helper_Functions.js';
 
-test('Test Automated Payments', async ({ page }) => {
+test('Test Automated Payments', async ({ page }: { page: Page }) => {
     // Step 1: Navigate to Home Page
     await page.goto('https://www.shearings.com');
     console.log('Navigated to Home Page');
@@ -21,8 +21,8 @@ test('Test Automated Payments', async ({ page }) => {
     console.log('Clicked on Automated Payments button');
 
     // Step 4: Verify the user is navigated to the correct page
-    const urlContainsText = 'how-automated-balance-payments-work';
-    const isUrlCorrect = await urlContains(page, urlContainsText);
+    const urlContainsText: string = 'how-automated-balance-payments-work';
+    const isUrlCorrect: boolean = await urlContains(page, urlContainsText);
     if (!isUrlCorrect) {
         throw new Error('Navigated to incorrect page');
     }
