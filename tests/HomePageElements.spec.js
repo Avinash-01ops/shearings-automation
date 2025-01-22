@@ -2,9 +2,9 @@ import { test, expect, Page } from '@playwright/test';
 import { getText, isEnabled, isVisible, getTextAndCompare } from '../pages/Helper_Functions';
 
 // Verify Home Page header elements
-test('Verify Home Page header elements', async ({ page }: { page: Page }) => {
-    const logo: string = '//*[@id="top"]/div[4]/a';
-    const homePageButton: string = '//*[@id="top"]/div[6]/nav/div/ul/li[1]/a';
+test('Verify Home Page header elements', async ({ page }) => {
+    const logo = '//*[@id="top"]/div[4]/a';
+    const homePageButton = '//*[@id="top"]/div[6]/nav/div/ul/li[1]/a';
 
     // Step 1: Open the homepage
     await page.goto('https://www.shearings.com/');
@@ -27,7 +27,7 @@ test('Verify Home Page header elements', async ({ page }: { page: Page }) => {
 
     // Step 3: Check Brochure Request, Opening Times, My Booking and Agent Login buttons
     for (let i = 1; i <= 4; i++) {
-        const button: string = `//*[@id="top"]/div[1]/div/ul/li[${i}]/a`;
+        const button = `//*[@id="top"]/div[1]/div/ul/li[${i}]/a`;
         if (await isVisible(page, button)) {
             await isEnabled(page, button);
             console.log(`Button ${i} is visible and clickable`);
@@ -38,7 +38,7 @@ test('Verify Home Page header elements', async ({ page }: { page: Page }) => {
 
     // Step 4: Check Destinations, Holidays, Useful Info and Search Page
     for (let i = 2; i <= 5; i++) {
-        const tab: string = `//*[@id="top"]/div[6]/nav/div/ul/li[${i}]/button`;
+        const tab = `//*[@id="top"]/div[6]/nav/div/ul/li[${i}]/button`;
         if (await isVisible(page, tab)) {
             await isEnabled(page, tab);
             console.log(`Page ${i} is visible and clickable`);
@@ -49,7 +49,7 @@ test('Verify Home Page header elements', async ({ page }: { page: Page }) => {
 
     // Step 5: Check Coach Holidays, Self Drive Holidays and River Cruise Search Tabs
     for (let i = 1; i <= 3; i++) {
-        const search: string = `//*[@id="elasticSearchFiltersTabs"]/li[${i}]/a`;
+        const search = `//*[@id="elasticSearchFiltersTabs"]/li[${i}]/a`;
         if (await isVisible(page, search)) {
             await isEnabled(page, search);
             console.log(`Search ${i} is visible and clickable`);
@@ -59,27 +59,27 @@ test('Verify Home Page header elements', async ({ page }: { page: Page }) => {
     }
 
     // Base XPath for banners and the "Next" button
-    const bannerBaseXPath: string = '//*[@id="top"]/div[2]/div/div[2]/div/div/div';
-    const bannerTextXPathSuffix: string = '/div/div/div/div/a';
-    const nextButtonXPath: string = '//*[@id="top"]/div[2]/div/div[1]/button[2]';
+    const bannerBaseXPath = '//*[@id="top"]/div[2]/div/div[2]/div/div/div';
+    const bannerTextXPathSuffix = '/div/div/div/div/a';
+    const nextButtonXPath = '//*[@id="top"]/div[2]/div/div[1]/button[2]';
 
     // Step 6: Check cover
     await isVisible(page, '/html/body/section[1]/div[4]');
     await isVisible(page, '/html/body/section[1]/div[5]');
     // Confirm if oneEuro XPath contains an image
-    const oneEuro: string = '/html/body/section[1]/div[6]/div';
-    const hasImage: boolean = await page.locator(`xpath=${oneEuro}//img`).first().isVisible();  
+    const oneEuro = '/html/body/section[1]/div[6]/div';
+    const hasImage = await page.locator(`xpath=${oneEuro}//img`).first().isVisible();  
     console.log(`Does ${oneEuro} contain an image? ${hasImage}`);
 
     // Step 7: Verify hassle-free promise banner
-    const h_banner: string = 'xpath=/html/body/section[1]/div[8]/div/div';
-    const h_banner_image: string = '/html/body/section[1]/div[8]/div/div/div/img';
-    const h_banner_title: string = '/html/body/section[1]/div[8]/div/div/div/h6';
+    const h_banner = 'xpath=/html/body/section[1]/div[8]/div/div';
+    const h_banner_image = '/html/body/section[1]/div[8]/div/div/div/img';
+    const h_banner_title = '/html/body/section[1]/div[8]/div/div/div/h6';
     if (await page.isVisible(h_banner)) {
         await isVisible(page, h_banner_image);
         await isVisible(page, h_banner_title);
         for (let i = 1; i <= 3; i++) {
-            const desc: string = `/html/body/section[1]/div[8]/div/div/div/ul/li[${i}]/text()`;
+            const desc = `/html/body/section[1]/div[8]/div/div/div/ul/li[${i}]/text()`;
             await isVisible(page, desc);
         }
     } else {
