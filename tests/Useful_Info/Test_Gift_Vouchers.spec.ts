@@ -1,12 +1,12 @@
-/* Description: This test script is created to test theGift Vouchers page
+/* Description: This test script is created to test the Gift Vouchers page
 Date: 08/01/2025
 Created by: Avi */
 
-import { test, expect } from '@playwright/test';
+import { test, Page } from '@playwright/test';
 import { Navigate_To_Useful_Info } from '../../pages/Useful_Info_Functions';
-import { getTextAndCompare, click, isVisible } from '../../pages/Helper_Functions';   
+import { getTextAndCompare} from '../../pages/Helper_Functions';
 
-test('Test Gift Vouchers', async ({ page }) => {    
+test('Test Gift Vouchers', async ({ page }: { page: Page }) => {
 
     // Navigate to Gift Vouchers page
     await Navigate_To_Useful_Info(page, '//*[@id="top"]/div[6]/nav/div/ul/li[4]/div/div/div[3]/div/ul/li[7]/a/span');

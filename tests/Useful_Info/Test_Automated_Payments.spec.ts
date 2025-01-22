@@ -2,22 +2,21 @@
 Date: 06/01/2025
 Created by: Avi */
 
-const { test, expect } = require('@playwright/test');
-const { HomePage, isVisible, urlContains, getText, getTextAndCompare } = require('../../pages/Helper_Functions.js');
+import { test, expect } from '@playwright/test';
+import { HomePage, isVisible, urlContains, getTextAndCompare } from '../../pages/Helper_Functions.js';
 
 test('Test Automated Payments', async ({ page }) => {
-
     // Step 1: Navigate to Home Page
     await page.goto('https://www.shearings.com');
     console.log('Navigated to Home Page');
 
     // Step 2: Click on Useful Info button
-    const usefulInfobutton = '//*[@id="top"]/div[6]/nav/div/ul/li[4]/button';
+    const usefulInfobutton: string = '//*[@id="top"]/div[6]/nav/div/ul/li[4]/button';
     await page.locator(usefulInfobutton).click();
     console.log('Clicked on Useful Info button');
 
     // Step 3: Click on Automated Payments button
-    const automatedPaymentsButton = '//*[@id="top"]/div[6]/nav/div/ul/li[4]/div/div/div[3]/div/ul/li[1]/a/span';
+    const automatedPaymentsButton: string = '//*[@id="top"]/div[6]/nav/div/ul/li[4]/div/div/div[3]/div/ul/li[1]/a/span';
     await page.locator(automatedPaymentsButton).click();
     console.log('Clicked on Automated Payments button');
 
@@ -30,13 +29,13 @@ test('Test Automated Payments', async ({ page }) => {
     console.log('Navigated to correct page');
 
     // Step 5: Verify the page title
-    const titleXpath = '//html/body/section[3]/div/div/div/p[1]';
-    const expectedTitle = 'Automated balance payments – let’s break it down!';
-    
-    const isTitleCorrect = await getTextAndCompare(page, titleXpath, expectedTitle);
-    if (titleXpath === expectedTitle) {
+    const titleXpath: string = '//html/body/section[3]/div/div/div/p[1]';
+    const expectedTitle: string = 'Automated balance payments – let’s break it down!';
+    const isTitleCorrect: boolean = await getTextAndCompare(page, titleXpath, expectedTitle);
+
+    if (isTitleCorrect) {
         console.log('Title verified');
     } else {
-        console.log('Title not verified');
+        console.error('Title verification failed!');
     }
 });

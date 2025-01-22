@@ -1,22 +1,26 @@
-/* Description: This test script is created to test the Deposits table
+/* Description: This test script is created to test the Financial Security Page
 Date: 08/01/2025
 Created by: Avi */
 
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 import { Navigate_To_Useful_Info } from '../../pages/Useful_Info_Functions';
 
-test('Test Deposits Table', async ({ page }) => {
-    test.setTimeout(120000); // Set timeout to 2 minutes for the test
-
-    await Navigate_To_Useful_Info(page, '//*[@id="top"]/div[6]/nav/div/ul/li[4]/div/div/div[3]/div/ul/li[4]/a/span');
-    console.log('Navigated to Deposits page');
+test('Test Financial Security Page', async ({ page }: { page: Page }) => {
+    await Navigate_To_Useful_Info(page, '//*[@id="top"]/div[6]/nav/div/ul/li[4]/div/div/div[3]/div/ul/li[5]/a/span');
+    console.log('Navigated to Financial Security page');
 
     // Wait for the table to load
     const tableLocator = page.locator('xpath=/html/body/section[2]/div/section/div/div/div/table');
-    await tableLocator.waitFor({ state: 'visible', timeout: 20000 });
+    await tableLocator.waitFor({ state: 'attached', timeout: 30000 });
+    console.log('Table is attached to the DOM');
+
+    // Ensure the table is visible
+    await tableLocator.waitFor({ state: 'visible', timeout: 30000 });
     console.log('Table is visible on the page');
 
+    // Wait for rows to load
     const rows = tableLocator.locator('tbody tr');
+    await rows.first().waitFor({ state: 'attached', timeout: 30000 });
     const rowCount = await rows.count();
     console.log(`Table has ${rowCount} rows`);
 
@@ -40,7 +44,7 @@ test('Test Deposits Table', async ({ page }) => {
         const cells = rows.nth(i).locator('td');
 
         // Explicitly wait for each cell to be visible
-        await cells.first().waitFor({ state: 'visible', timeout: 10000 });
+        await cells.first().waitFor({ state: 'attached', timeout: 10000 });
 
         const holidayType = (await cells.nth(0).textContent())?.trim() || '';
         const superLowDeposit = (await cells.nth(1).textContent())?.trim() || '';

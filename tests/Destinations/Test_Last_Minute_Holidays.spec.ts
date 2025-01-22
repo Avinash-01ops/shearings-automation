@@ -4,7 +4,7 @@ Created by: Avi */
 
 import { test, expect } from '@playwright/test';
 import { Navigate_To_Destinations } from '../../pages/Destinations_Functions';
-import { getTextAndCompare, isVisible, urlContains, isEnabled } from '../../pages/Helper_Functions';
+import { getTextAndCompare, isVisible, urlContains } from '../../pages/Helper_Functions';
 
 test('Test Last minute holidays', async ({ page }) => {
 
@@ -12,13 +12,16 @@ test('Test Last minute holidays', async ({ page }) => {
     await Navigate_To_Destinations(page, '//*[@id="top"]/div[6]/nav/div/ul/li[2]/div/div/div[4]/div[1]/div/a/div/div/h4');
     console.log('Navigated to Last minute holidays page');
 
-    if(await urlContains(page, 'last-minute-holidays')===true) {
-        //verify page title
+    if (await urlContains(page, 'last-minute-holidays') === true) {
+        // Verify page title
         const pageTitleXpath = '/html/body/section[2]/div/div/div/div/h1';
         await getTextAndCompare(page, pageTitleXpath, 'Last minute holidays');
-        console.log('URl and title verified.');
-    } else {console.log('URL not verified')}
-    
+        console.log('URL and title verified.');
+    } else {
+        console.log('URL not verified');
+    }
+
+    // Verify content description
     const element1 = '/html/body/section[2]/div/div/div/div/h3';
     const element2 = '/html/body/section[2]/div/div/div/div/p/text()';
     await isVisible(page, element1);
@@ -26,21 +29,21 @@ test('Test Last minute holidays', async ({ page }) => {
     console.log('Content description verified successfully.');
 
     // Verify Holiday table Headers
-for (let i = 1; i <= 6; i++) {
-    const xpath = `//*[@id="tour-search-results"]/div/section/div[8]/div/div[1]/div/div[${i}]`;
-    const element = page.locator(`xpath=${xpath}`);
-    
-    // Check if element exists before checking visibility
-    const elementCount = await element.count();
-    if (elementCount === 0) {
-        console.error(`Header element at ${xpath} does not exist.`);
-        continue; // Skip this iteration if the element does not exist
+    for (let i = 1; i <= 6; i++) {
+        const xpath = `//*[@id="tour-search-results"]/div/section/div[8]/div/div[1]/div/div[${i}]`;
+        const element = page.locator(`xpath=${xpath}`);
+        
+        // Check if element exists before checking visibility
+        const elementCount = await element.count();
+        if (elementCount === 0) {
+            console.error(`Header element at ${xpath} does not exist.`);
+            continue; // Skip this iteration if the element does not exist
+        }
+        
+        const isVisibleElement = await element.isVisible({ timeout: 3000 }); // Increased timeout
+        expect(isVisibleElement).toBe(true);
+        console.log(`Header at ${xpath} is ${isVisibleElement ? 'visible' : 'not visible'}`);
     }
-    
-    const isVisible = await element.isVisible({ timeout: 3000 }); // Increased timeout
-    expect(isVisible).toBe(true, `Header at ${xpath} is not visible`);
-    console.log(`Header at ${xpath} is ${isVisible ? 'visible' : 'not visible'}`);
-}
 
     // Verify Holiday cards
     for (let j = 1; j <= 10; j++) {
@@ -55,8 +58,7 @@ for (let i = 1; i <= 6; i++) {
         }
         
         const isVisible1 = await element1.isVisible({ timeout: 3000 }); // Increased timeout
-        expect(isVisible1).toBe(true, `Holiday card at ${xpath1} is not visible`);
+        expect(isVisible1).toBe(true);
         console.log(`Holiday card at ${xpath1} is ${isVisible1 ? 'visible' : 'not visible'}`);
     }
-
 });
