@@ -1,11 +1,11 @@
-/* Description: This test is created to test the opening times functionality
-Date: 03/01/2025
-Created by: Avi */
+import { test, expect, Page } from '@playwright/test';
+import { HomePage, isVisible } from '../pages/Helper_Functions';
 
-const { test, expect } = require('@playwright/test');
-const { HomePage, isVisible } = require('../pages/Helper_Functions.js');
+// Description: This test is created to test the opening times functionality
+// Date: 03/01/2025
+// Created by: Avi
 
-test('Test Opening Times', async ({ page }) => {
+test('Test Opening Times', async ({ page }: { page: Page }) => {
     // Instantiate the HomePage class
     const homePage = new HomePage(page);
 

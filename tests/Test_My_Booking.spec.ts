@@ -1,11 +1,11 @@
-/* Description: This test is created to test My Booking button
-Date: 03/01/2025
-Created by: Avi */
+import { test, expect, Page } from '@playwright/test';
+import { HomePage, isVisible } from '../pages/Helper_Functions';
 
-const { test, expect } = require('@playwright/test');
-const { HomePage, isVisible } = require('../pages/Helper_Functions.js');
+// Description: This test is created to test My Booking button
+// Date: 03/01/2025
+// Created by: Avi
 
-test('Test My Booking', async ({ page }) => {
+test('Test My Booking', async ({ page }: { page: Page }) => {
     // Instantiate the HomePage class
     const homePage = new HomePage(page);    
 
@@ -39,5 +39,4 @@ test('Test My Booking', async ({ page }) => {
     const ABTA_Visible = await isVisible(page, ABTA);
     const Password_Visible = await isVisible(page, Password)
     console.log('User is redirected to Agent Login Page successfully');
-
 });

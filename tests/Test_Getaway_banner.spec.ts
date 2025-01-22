@@ -1,11 +1,11 @@
-/* Description: This test script is created to test the Getaway Banner functionality
-Date: 06/01/2025
-Created by: Avi */
+import { test, expect, Page } from '@playwright/test';
+import { getTextAndCompare } from '../pages/Helper_Functions';
 
-const { test, expect } = require('@playwright/test');
-const { getTextAndCompare } = require('../pages/Helper_Functions');
+// Description: This test script is created to test the Getaway Banner functionality
+// Date: 06/01/2025
+// Created by: Avi
 
-test('Test Getaway Banner', async ({ page }) => {
+test('Test Getaway Banner', async ({ page }: { page: Page }) => {
 
     // Step 1: Navigate to Home Page
     await page.goto('https://www.shearings.com');

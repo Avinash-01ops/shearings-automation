@@ -1,12 +1,12 @@
-/* Description: This test is created to test the brochure request functionality
-Date: 02/01/2025
-Created by: Avi */
+import { test, expect, Page } from '@playwright/test';
+import { HomePage, isVisible, urlContains, getText } from '../pages/Helper_Functions';
 
-const { test, expect } = require('@playwright/test');
-const { HomePage, isVisible, urlContains, getText } = require('../pages/Helper_Functions.js');
+// Description: This test is created to test the brochure request functionality
+// Date: 02/01/2025
+// Created by: Avi
 
-test('Test Brochure Request', async ({ page }) => {
-    
+test('Test Brochure Request', async ({ page }: { page: Page }) => {
+
     // Instantiate the HomePage class
     const homePage = new HomePage(page);
 
@@ -18,13 +18,6 @@ test('Test Brochure Request', async ({ page }) => {
     await page.locator(BrochureRequestXPath).click();
     console.log('Clicked on the Brochure Request button');
 
-    // Click on close button
-    // const closeButton = '//*[@id="om-mv3crt1ouu2cysd991o5-optin"]/div/button/svg/path';
-    // if (await ElementUtils.isVisible(page, closeButton)) {
-    //     await page.locator(closeButton).click();
-    //     console.log('Clicked on close button');
-    // }
-
     // Verify the navigation to the brochure request page
     await expect(page).toHaveURL(/brochurerequest/);
     console.log('Navigated to brochure request page');
@@ -35,7 +28,7 @@ test('Test Brochure Request', async ({ page }) => {
         '//*[@id="brochureRequest"]/div/form/div/div[1]/div[2]/div/div[3]/label/span[2]',
         '//*[@id="brochureRequest"]/div/form/div/div[1]/div[3]/div/div[3]/label/span[2]'
     ];
-    
+
     for (const brochure of brochures) {
         const brochureLocator = page.locator(brochure);
         await brochureLocator.waitFor({ state: 'visible' }); // Ensure element is visible
@@ -94,7 +87,7 @@ test('Test Brochure Request', async ({ page }) => {
     const successMessageXpath = '/html/body/section[2]/div/div[2]/div[1]';
     await expect(page).toContainText(/success/);
     console.log('Redirected to brochure request success page');
-    
+
     // Fetch and log success message
     const successMessage = await page.locator(successMessageXpath).innerText();
     console.log(`Brochure request success message: ${successMessage}`);

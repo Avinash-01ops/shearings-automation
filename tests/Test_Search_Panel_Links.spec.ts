@@ -1,11 +1,11 @@
-/* Description: This test script is created to test the Agent Login button functionality
-Date: 06/01/2025
-Created by: Avi */
+import { test, expect, Page } from '@playwright/test';
+import { getTextAndCompare } from '../pages/Helper_Functions';
 
-const { test, expect } = require('@playwright/test');
-const { getTextAndCompare } = require('../pages/Helper_Functions');
+// Description: This test script is created to test the Agent Login button functionality
+// Date: 06/01/2025
+// Created by: Avi
 
-test('Test Search Functionality and Banners', async ({ page }) => {
+test('Test Search Functionality and Banners', async ({ page }: { page: Page }) => {
     // Step 1: Navigate to the Home Page
     await page.goto('https://www.shearings.com');
     console.log('Navigated to Home Page');
@@ -45,7 +45,7 @@ test('Test Search Functionality and Banners', async ({ page }) => {
         console.error('Banner 1 title verification failed.');
     }
 
-    // Step 5: Click and verify Banner 2
+    // Step 5: Click and verify Banner 2 (commented out for now)
     // await page.goto('https://www.shearings.com'); // Go back to Home Page
     // await page.locator(searchButton).click(); // Open search menu again
     // await page.locator(banner2Xpath).click();

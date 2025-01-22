@@ -2,8 +2,8 @@
 Date: 06/01/2025
 Created by: Avi */
 
-const { test, expect } = require('@playwright/test');
-const { HomePage, isVisible, urlContains, getText } = require('../pages/Helper_Functions.js');
+import { test, expect } from '@playwright/test';
+import { HomePage, isVisible, urlContains, getText } from '../pages/Helper_Functions.js';
 
 test('Test Agent Login functionality', async ({ page }) => {
     // Instantiate the HomePage class
